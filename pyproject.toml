@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tooldata-lint"
+version = "0.1.0"
+description = "Lint tool-calling fine-tuning data (JSONL) before training: JSON Schema argument checks, call/response pairing, argument encoding."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["fine-tuning", "tool-calling", "function-calling", "jsonl", "lint", "json-schema", "dataset"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+    "Typing :: Typed",
+]
+dependencies = [
+    "jsonschema>=4.26.0,<5",
+]
+
+[project.scripts]
+tooldata-lint = "tooldata_lint.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tooldata_lint"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
