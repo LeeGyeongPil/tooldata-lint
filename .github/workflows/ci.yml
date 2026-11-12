@@ -1,0 +1,35 @@
+name: ci
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.13"]
+    steps:
+      - uses: actions/checkout@v6.1.0
+      - uses: astral-sh/setup-uv@v10.3.3
+      - run: uv sync --locked --python ${{ matrix.python }}
+      - run: uv run pytest -q
+      - name: Smoke test (exit codes are intended, so compare them)
+        shell: bash
+        run: |
+          set +e
+          uv run tooldata-lint examples/defects.jsonl > smoke.txt
+          rc=$?
+          set -e
+          cat smoke.txt
+          test "$rc" -eq 1
+          grep -F "12 problems (11 errors, 1 warning)" smoke.txt
+          uv run tooldata-lint examples/clean.jsonl
+          uv run tooldata-lint examples/defects.jsonl --lang ko --exit-zero
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.1.0
+      - uses: astral-sh/setup-uv@v10.3.3
+      - run: uv build
