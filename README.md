@@ -40,7 +40,7 @@ uv run tooldata-lint --version
 ```
 
 ```text
-tooldata-lint 0.1.0
+tooldata-lint 0.1.1
 ```
 
 The package is also prepared for `uv tool install git+https://github.com/LeeGyeongPil/tooldata-lint` and, once published on PyPI, `uvx tooldata-lint`.
@@ -349,9 +349,7 @@ uv run pytest
 ```
 
 ```text
-........................................................................ [ 77%]
-.....................                                                    [100%]
-93 passed in 13.93s
+all tests passed
 ```
 
 Bug reports and suggestions are welcome as issues. Changes are listed in [CHANGELOG.md](CHANGELOG.md).

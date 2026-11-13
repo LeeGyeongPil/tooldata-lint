@@ -40,7 +40,7 @@ uv run tooldata-lint --version
 ```
 
 ```text
-tooldata-lint 0.1.0
+tooldata-lint 0.1.1
 ```
 
 `uv tool install git+https://github.com/LeeGyeongPil/tooldata-lint` 로도 설치할 수 있게 준비되어 있고, PyPI 에 올라가면 `uvx tooldata-lint` 로 바로 실행할 수 있습니다.
@@ -349,9 +349,7 @@ uv run pytest
 ```
 
 ```text
-........................................................................ [ 77%]
-.....................                                                    [100%]
-93 passed in 13.93s
+all tests passed
 ```
 
 버그와 제안은 이슈로 남겨 주세요. 변경 기록은 [CHANGELOG.md](CHANGELOG.md) 에 있습니다.
