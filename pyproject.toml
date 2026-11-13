@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "tooldata-lint"
-version = "0.1.0"
+version = "0.1.1"
 description = "Lint tool-calling fine-tuning data (JSONL) before training: JSON Schema argument checks, call/response pairing, argument encoding."
 readme = "README.md"
 license = { text = "MIT" }

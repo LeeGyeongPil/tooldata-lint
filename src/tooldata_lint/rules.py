@@ -13,6 +13,7 @@ from typing import Any
 
 from jsonschema import Draft202012Validator
 from jsonschema.exceptions import ValidationError
+from referencing import Registry
 from referencing.exceptions import Unresolvable
 
 from .formats.common import json_path
@@ -29,7 +30,8 @@ def _validator(schema: Any) -> Draft202012Validator:
     if cached is not None:
         _validators.move_to_end(key)
         return cached
-    validator = Draft202012Validator(schema)
+    # An empty registry without a retriever: a remote $ref is never downloaded (it ends as S001).
+    validator = Draft202012Validator(schema, registry=Registry())
     _validators[key] = validator
     if len(_validators) > _CACHE_LIMIT:
         _validators.popitem(last=False)
