@@ -187,6 +187,17 @@ def _schema_errors(call: Call, tool: ToolDef, args: Any) -> list[Finding]:
                 detail=str(exc),
             )
         ]
+    except RecursionError as exc:  # a $ref cycle that never consumes the value
+        tool.schema_ok = False
+        return [
+            Finding(
+                "S001",
+                {"tool": call.name},
+                variant="ref_cycle",
+                location=call.location,
+                detail=type(exc).__name__,
+            )
+        ]
     return [
         Finding(
             "V001",
