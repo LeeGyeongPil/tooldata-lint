@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+## [0.1.2] - 2026-11-23
+
+### Fixed
+- A tool schema whose `$ref` cycles without consuming a value (such as `{"$ref": "#"}`) crashed
+  the run with an internal error. It is now reported as S001 and linting continues.
+
 ## [0.1.1] - 2026-11-13
 
 ### Fixed

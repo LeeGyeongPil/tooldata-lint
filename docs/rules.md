@@ -8,7 +8,7 @@ Use `--ignore CODE[,CODE]` to drop codes.
 |---|---|---|---|
 | J001 | error | The line is not valid JSON (or not UTF-8). Linting continues with the next line. | Fix or remove the line. |
 | U001 | warning | Record is neither a `messages` nor a `conversations` record (skipped), or the file has no records at all (empty or blank lines only). | Convert it or exclude it from the file; check the step that wrote an empty file. |
-| S001 | error | A tool's `parameters` is not a valid JSON Schema, has a `$ref` that cannot be resolved (references are never fetched), or `tools` has the wrong shape; also a `tool_calls` that is not a list or a message/call that is not an object. Calls to that tool are not validated. | Fix the schema; check the `path` and `keyword` in the message. |
+| S001 | error | A tool's `parameters` is not a valid JSON Schema, has a `$ref` that cannot be resolved (references are never fetched), has a `$ref` that cycles without consuming a value (such as `{"$ref":"#"}`), or `tools` has the wrong shape; also a `tool_calls` that is not a list or a message/call that is not an object. Calls to that tool are not validated. | Fix the schema; check the `path` and `keyword` in the message. |
 | T001 | error | The call names a tool that is not in the record's `tools`. | Add the tool definition or fix the call name. |
 | T002 | error | The record has tool calls but no `tools` at all (reported once per record). | Add `tools` to the record. |
 | V001 | error | The call's arguments violate the tool's JSON Schema. One finding per violation, with `json_path` and the failing `keyword` (`enum`, `required`, `type`, `additionalProperties`, ...). | Fix the arguments or the schema. |

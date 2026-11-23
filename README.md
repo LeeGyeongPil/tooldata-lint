@@ -40,7 +40,7 @@ uv run tooldata-lint --version
 ```
 
 ```text
-tooldata-lint 0.1.1
+tooldata-lint 0.1.2
 ```
 
 The package is also prepared for `uv tool install git+https://github.com/LeeGyeongPil/tooldata-lint` and, once published on PyPI, `uvx tooldata-lint`.
@@ -316,7 +316,7 @@ This repository's own workflow runs the same kind of exit-code check on the samp
 - When `arguments` is double-encoded (`A002`), the inner object is not validated against the schema, because there is no object to validate.
 - The tool checks arguments against the tool's JSON Schema, not against a model's chat template. A Hermes or template check is planned, not available.
 - Findings on the same line are listed in the order they are found, not sorted by rule code (for example, `P002` can come before `P001`).
-- A `$ref` that cannot be resolved (a missing local definition or a remote URL) is reported as `S001`. Remote references are never downloaded.
+- A `$ref` that cannot be resolved (a missing local definition or a remote URL) is reported as `S001`. Remote references are never downloaded. A `$ref` cycle that never consumes a value (for example `{"$ref": "#"}`) is also reported as `S001`, and the other lines are still checked.
 - It does not look for general dataset problems such as duplicates, PII, role order or token length.
 
 ## When to use it
@@ -349,7 +349,7 @@ uv run pytest
 ```
 
 ```text
-all tests passed
+102 passed
 ```
 
 Bug reports and suggestions are welcome as issues. Changes are listed in [CHANGELOG.md](CHANGELOG.md).

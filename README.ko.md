@@ -40,7 +40,7 @@ uv run tooldata-lint --version
 ```
 
 ```text
-tooldata-lint 0.1.1
+tooldata-lint 0.1.2
 ```
 
 `uv tool install git+https://github.com/LeeGyeongPil/tooldata-lint` 로도 설치할 수 있게 준비되어 있고, PyPI 에 올라가면 `uvx tooldata-lint` 로 바로 실행할 수 있습니다.
@@ -316,7 +316,7 @@ jobs:
 - `arguments` 가 이중 인코딩(`A002`)이면 검증할 객체가 없으므로 안쪽 객체는 스키마 검증을 하지 않습니다.
 - 도구의 JSON Schema 에 대해서만 인자를 검사하며, 모델의 채팅 템플릿에 대한 검사는 아닙니다. Hermes·템플릿 검사는 계획일 뿐 아직 없습니다.
 - 같은 줄의 결과는 규칙 코드순이 아니라 발견한 순서로 나옵니다(예: `P002` 가 `P001` 보다 먼저 나올 수 있음).
-- 풀 수 없는 `$ref`(없는 로컬 정의, 원격 URL)는 `S001` 로 보고합니다. 원격 참조는 내려받지 않습니다.
+- 풀 수 없는 `$ref`(없는 로컬 정의, 원격 URL)는 `S001` 로 보고합니다. 원격 참조는 내려받지 않습니다. 값을 소비하지 않고 순환하는 `$ref`(예: `{"$ref": "#"}`)도 `S001` 로 보고하며 나머지 줄은 계속 점검합니다.
 - 중복·개인정보·역할 순서·토큰 길이 같은 일반 데이터셋 문제는 찾지 않습니다.
 
 ## 언제 쓰나
@@ -349,7 +349,7 @@ uv run pytest
 ```
 
 ```text
-all tests passed
+102 passed
 ```
 
 버그와 제안은 이슈로 남겨 주세요. 변경 기록은 [CHANGELOG.md](CHANGELOG.md) 에 있습니다.
